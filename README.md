@@ -1,4 +1,4 @@
-# World-Of-Os
+# World Of Os
 World of Os is a text-based game where you draft 3 Enima and fight an AI in a 3v3 battle. 
 
 # Main Features
