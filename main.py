@@ -190,15 +190,18 @@ class UserInterface:
         return temp_dict
 
 
-def choose_randomly():
-    result = random.random()
+def choose_randomly(random_value):
+    result = random_value
 
+    # 60% to choose Attack, 20% to switch to 2nd Enima, 20% to switch to 3rd Enima
     if result <= 0.60:
-        return 1
-    elif (result > 0.70) and (result <= 0.85):
-        return 2
+        response = 1
+    elif (result > 0.60) and (result <= 0.80):
+        response = 2
     else:
-        return 3
+        response = 3
+
+    return response
 
 
 class InputProcessor:
@@ -469,7 +472,7 @@ if __name__ == '__main__':
         UserInterface.show_lead_info(joey)
         UserInterface.show_options(you)
         player_input = InputProcessor.check_if_input_valid(True, ["1", "2", "3"])
-        ai_input = choose_randomly()
+        ai_input = choose_randomly(random.random())
         if all(e.get_health() <= 0 for e in joey.enima[1:]):
             ai_input = 1
         InputProcessor.check_inputs(player_input, ai_input, you, joey, elements)
