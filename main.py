@@ -1,14 +1,27 @@
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-# Use a breakpoint in the code line below to debug your script.
-# Press Ctrl+F8 to toggle the breakpoint.
-# Press the green button in the gutter to run the script.
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
-# The Battle of Os
-# Anima
+# Initial name ideas were:
+# - Game Name: The Battle of Os
+# - Creature Name: Anima
+#
+# Final names:
+# - Game Name: World of Os
+# - Creature Name: Enima (Elemental Animals, or Elemental Anima)
 import random
 import sys
+
+animals = ['Rat', 'Ox', 'Tiger', 'Rabbit',
+           'Dragon', 'Snake', 'Horse', 'Goat',
+           'Monkey', 'Rooster', 'Dog', 'Pig']
+
+elements = {'Fire': {'Destroys': 'Metal', 'Destroyed By': 'Water', 'Strengthens': 'Earth', 'Colour': 'Red'},
+            'Metal': {'Destroys': 'Wood', 'Destroyed By': 'Fire', 'Strengthens': 'Water', 'Colour': 'White'},
+            'Wood': {'Destroys': 'Earth', 'Destroyed By': 'Metal', 'Strengthens': 'Fire', 'Colour': 'Green'},
+            'Earth': {'Destroys': 'Water', 'Destroyed By': 'Wood', 'Strengthens': 'Metal', 'Colour': 'Yellow'},
+            'Water': {'Destroys': 'Fire', 'Destroyed By': 'Earth', 'Strengthens': 'Wood', 'Colour': 'Blue'}}
+
+stats = {'Health': {'Min': 200, 'Max': 400},
+         'Attack': {'Min': 50, 'Max': 150},
+         'Defense': {'Min': 50, 'Max': 150},
+         'Speed': {'Min': 50, 'Max': 150}}
 
 
 class Enima:
@@ -377,22 +390,6 @@ class GameStates:
 
 
 if __name__ == '__main__':
-
-    animals = ['Rat', 'Ox', 'Tiger', 'Rabbit',
-               'Dragon', 'Snake', 'Horse', 'Goat',
-               'Monkey', 'Rooster', 'Dog', 'Pig']
-
-    elements = {'Fire': {'Destroys': 'Metal', 'Destroyed By': 'Water', 'Strengthens': 'Earth', 'Colour': 'Red'},
-                'Metal': {'Destroys': 'Wood', 'Destroyed By': 'Fire', 'Strengthens': 'Water', 'Colour': 'White'},
-                'Wood': {'Destroys': 'Earth', 'Destroyed By': 'Metal', 'Strengthens': 'Fire', 'Colour': 'Green'},
-                'Earth': {'Destroys': 'Water', 'Destroyed By': 'Wood', 'Strengthens': 'Metal', 'Colour': 'Yellow'},
-                'Water': {'Destroys': 'Fire', 'Destroyed By': 'Earth', 'Strengthens': 'Wood', 'Colour': 'Blue'}}
-
-    stats = {'Health': {'Min': 200, 'Max': 400},
-             'Attack': {'Min': 50, 'Max': 150},
-             'Defense': {'Min': 50, 'Max': 150},
-             'Speed': {'Min': 50, 'Max': 150}}
-
     start_message = (
         "Hey there, welcome to the world of Os. \n"
         f"One boring afternoon, some scientists decided to experiment on animals and made them fight each other.\n" 
