@@ -1,9 +1,7 @@
 import unittest
-from unittest.mock import MagicMock, patch
 
 from main import Enima
 from main import animals, elements, stats
-
 
 
 class TestEnima(unittest.TestCase):
@@ -51,6 +49,24 @@ class TestEnima(unittest.TestCase):
         expected_response = f'Health: 400  Attack: 150  Defense: 150  Speed: 150'
         actual_response = self.enima1.show_stats()
         self.assertEqual(actual_response, expected_response)
+
+    def test_bonus_for_neutral_effectiveness(self):
+        self.enima1.element = 'Fire'
+        self.enima2.element = 'Fire'
+        _, bonus = self.enima1.deal_damage(self.enima2, elements)
+        self.assertEqual(bonus, 1.0)
+
+    def test_bonus_for_super_effectiveness(self):
+        self.enima1.element = 'Fire'
+        self.enima2.element = 'Metal'
+        _, bonus = self.enima1.deal_damage(self.enima2, elements)
+        self.assertEqual(bonus, 1.5)
+
+    def test_bonus_for_non_effectiveness(self):
+        self.enima1.element = 'Fire'
+        self.enima2.element = 'Earth'
+        _, bonus = self.enima1.deal_damage(self.enima2, elements)
+        self.assertEqual(bonus, 0.5)
 
     def test_take_correct_amount_of_damage(self):
         remaining_health = self.enima1.get_health() - 50
