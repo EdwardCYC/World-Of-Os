@@ -56,12 +56,19 @@ class Enima:
     def get_speed(self):
         return self.speed
 
+    # Show Enima stats during drafting phase
     def show_stats(self):
-        print(
-            "Health: ", self.get_health(),
-            "Attack: ", self.get_attack(),
-            "Defense: ", self.get_defense(),
-            "Speed: ", self.get_speed())
+        response = f'Health: {self.get_health()}  ' \
+            f'Attack:  {self.get_attack()}  ' \
+            f'Defense: {self.get_defense()}  ' \
+            f'Speed: {self.get_speed()}'
+        print(response)
+        return response
+        # print(
+        #     "Health: ", self.get_health(),
+        #     "Attack: ", self.get_attack(),
+        #     "Defense: ", self.get_defense(),
+        #     "Speed: ", self.get_speed())
 
     def deal_damage(self, opp_enima, element_list):
         own_element = self.get_element()
