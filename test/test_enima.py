@@ -1,5 +1,6 @@
 import unittest
 
+import main
 from main import Enima
 from main import animals, elements, stats
 
@@ -67,6 +68,14 @@ class TestEnima(unittest.TestCase):
         self.enima2.element = 'Earth'
         _, bonus = self.enima1.deal_damage(self.enima2, elements)
         self.assertEqual(bonus, 0.5)
+
+    def test_deal_correct_amount_of_damage(self):
+        self.enima1.element = 'Fire'
+        self.enima2.element = 'Fire'
+        self.enima1.attack = 100
+        self.enima2.defense = 50
+        damage_dealt, _ = self.enima1.deal_damage(self.enima2, elements)
+        self.assertEqual(damage_dealt, main.Combat.calc_damage(100, 50, 1.0))
 
     def test_take_correct_amount_of_damage(self):
         remaining_health = self.enima1.get_health() - 50
