@@ -90,3 +90,7 @@ class TestEnima(unittest.TestCase):
     def test_return_0_if_alive(self):
         self.enima1.health = 100
         self.assertEqual(self.enima1.check_if_dead(), 0)
+
+
+if __name__ == '__main__':
+    unittest.main()

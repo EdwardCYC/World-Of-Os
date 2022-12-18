@@ -16,3 +16,7 @@ class TestChooseRandomly(unittest.TestCase):
     def test_should_return_three(self):
         self.assertEqual(choose_randomly(0.81), 3)
         self.assertEqual(choose_randomly(1), 3)
+
+
+if __name__ == '__main__':
+    unittest.main()
