@@ -31,5 +31,14 @@ class TestSpeedComparison(unittest.TestCase):
         self.assertEqual(speed_comparison_result, 0)
 
 
+class TestCalcDamage(unittest.TestCase):
+    def test_calc_damage_correctly(self):
+        attack = 100
+        defense = 100
+        bonus = 1.0
+        damage = Combat.calc_damage(attack, defense, bonus)
+        self.assertAlmostEqual(damage, 104, delta=32)
+
+
 if __name__ == '__main__':
     unittest.main()
