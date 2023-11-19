@@ -1,6 +1,8 @@
 # Final Names:
 # - Game Name: World of Os
 # - Creature Name: Enima (Elemental Animals or Elemental Anima)
+# Current Version: 1.1
+# Version Date: 19 November 2023
 
 import random
 import sys
