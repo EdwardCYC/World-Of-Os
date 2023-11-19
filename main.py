@@ -1,27 +1,32 @@
-# Initial name ideas were:
-# - Game Name: The Battle of Os
-# - Creature Name: Anima
-#
-# Final names:
+# Final Names:
 # - Game Name: World of Os
-# - Creature Name: Enima (Elemental Animals, or Elemental Anima)
+# - Creature Name: Enima (Elemental Animals or Elemental Anima)
+
 import random
 import sys
+from enum import Enum
 
-animals = ['Rat', 'Ox', 'Tiger', 'Rabbit',
-           'Dragon', 'Snake', 'Horse', 'Goat',
-           'Monkey', 'Rooster', 'Dog', 'Pig']
 
-elements = {'Fire': {'Destroys': 'Metal', 'Destroyed By': 'Water', 'Strengthens': 'Earth', 'Colour': 'Red'},
-            'Metal': {'Destroys': 'Wood', 'Destroyed By': 'Fire', 'Strengthens': 'Water', 'Colour': 'White'},
-            'Wood': {'Destroys': 'Earth', 'Destroyed By': 'Metal', 'Strengthens': 'Fire', 'Colour': 'Green'},
-            'Earth': {'Destroys': 'Water', 'Destroyed By': 'Wood', 'Strengthens': 'Metal', 'Colour': 'Yellow'},
-            'Water': {'Destroys': 'Fire', 'Destroyed By': 'Earth', 'Strengthens': 'Wood', 'Colour': 'Blue'}}
+class Painfulness(Enum):
+    STRONG = 1.8
+    NORMAL = 1.0
+    WEAK = 0.75
 
-stats = {'Health': {'Min': 200, 'Max': 400},
-         'Attack': {'Min': 50, 'Max': 150},
-         'Defense': {'Min': 50, 'Max': 150},
-         'Speed': {'Min': 50, 'Max': 150}}
+
+animals = ['Ratt', 'Oxx', 'Tiger', 'Rabbitt',
+           'Dragon', 'Snak', 'Horse', 'Goatt',
+           'Monkey', 'Rooster', 'Dogg', 'Pigg']
+
+elements = {'Fire': {'Strong Against': 'Metal', 'Weak To': 'Water', 'Resisted By': 'Earth', 'Colour': 'Red'},
+            'Metal': {'Strong Against': 'Wood', 'Weak To': 'Fire', 'Resisted By': 'Water', 'Colour': 'Magenta'},
+            'Wood': {'Strong Against': 'Earth', 'Weak To': 'Metal', 'Resisted By': 'Fire', 'Colour': 'Green'},
+            'Earth': {'Strong Against': 'Water', 'Weak To': 'Wood', 'Resisted By': 'Metal', 'Colour': 'Yellow'},
+            'Water': {'Strong Against': 'Fire', 'Weak To': 'Earth', 'Resisted By': 'Wood', 'Colour': 'Blue'}}
+
+stats = {'Health': {'Min': 15, 'Max': 25},
+         'Attack': {'Min': 6, 'Max': 10},
+         'Defense': {'Min': 6, 'Max': 10},
+         'Speed': {'Min': 1, 'Max': 5}}
 
 
 class Enima:
@@ -59,21 +64,21 @@ class Enima:
     # Show Enima stats during drafting phase
     def show_stats(self):
         response = f'Health: {self.get_health()}  ' \
-            f'Attack: {self.get_attack()}  ' \
-            f'Defense: {self.get_defense()}  ' \
-            f'Speed: {self.get_speed()}'
+                   f'Attack: {self.get_attack()}  ' \
+                   f'Defense: {self.get_defense()}  ' \
+                   f'Speed: {self.get_speed()}'
         print(response)
         return response
 
     def deal_damage(self, opp_enima, element_list):
         own_element = self.get_element()
         target_element = opp_enima.get_element()
-        if element_list[own_element]['Destroys'] == target_element:
-            bonus = 1.5
-        elif element_list[own_element]['Strengthens'] == target_element:
-            bonus = 0.5
+        if element_list[own_element]['Strong Against'] == target_element:
+            bonus = Painfulness['STRONG'].value
+        elif element_list[own_element]['Resisted By'] == target_element:
+            bonus = Painfulness['WEAK'].value
         else:
-            bonus = 1.0
+            bonus = Painfulness['NORMAL'].value
         return Combat.calc_damage(self.get_attack(), opp_enima.get_defense(), bonus), bonus
 
     def take_damage(self, damage: float):
@@ -172,10 +177,10 @@ class UserInterface:
 
     @staticmethod
     def display_damage(attacker: Enima, target: Enima, damage: int, pain: float):
-        if pain == 1.5:
+        if pain == Painfulness['STRONG'].value:
             print(f"{attacker.get_name()} attacks {target.get_name()}!")
             print(f"{target.get_name()} received {damage} damage. It looks quite painful!")
-        elif pain == 0.5:
+        elif pain == Painfulness['WEAK'].value:
             print(f"{attacker.get_name()} attacks {target.get_name()}!")
             print(f"{target.get_name()} received {damage} damage, but it's just a scratch...")
         else:
@@ -208,10 +213,10 @@ class UserInterface:
 def choose_randomly(random_value):
     result = random_value
 
-    # 60% to choose Attack, 20% to switch to 2nd Enima, 20% to switch to 3rd Enima
-    if result <= 0.60:
+    # 70% to choose Attack, 15% to switch to 2nd Enima, 15% to switch to 3rd Enima
+    if result <= 0.70:
         response = 1
-    elif (result > 0.60) and (result <= 0.80):
+    elif (result > 0.70) and (result <= 0.85):
         response = 2
     else:
         response = 3
@@ -324,7 +329,7 @@ class Combat:
 
     @staticmethod
     def calc_damage(attack: int, defense: int, element_bonus: float):
-        return ((attack * 520) / (defense + 400)) * element_bonus + random.randint(0, 32)
+        return ((attack * 15) / (defense + 5)) * element_bonus + random.randint(0, 2)
 
     @staticmethod
     def resolve_damage_steps(attacker: Enima, target: Enima, element_list):
@@ -393,11 +398,18 @@ class GameStates:
 
 if __name__ == '__main__':
     start_message = (
-        "Hey there, welcome to the world of Os. \n"
-        f"One boring afternoon, some scientists decided to experiment on animals and made them fight each other.\n" 
-        f"This resulted in the creation of Enima, elemental animals whose sole purpose is to fight.\n" 
-        f"" 
-        f"So that's the backstory. Now take these Enima with you, and go spill some blood!\n")
+        "Welcome to the world of Os. \n"
+        f"\n"
+        f"One day, some scientists experimented on animals and made them fight each other.\n"
+        f"\n"
+        f"They created the Enima, elemental animals whose only purpose is to fight.\n"
+        f"\n"
+        f"Or so the story goes.\n"
+        f"\n"
+        f"As for you, you are a fellow violence enjoyer.\n"
+        f"Choose any three Enima you like and best your opponent.\n"
+        f"But beware: your opponent gets to choose from the Enima you dismissed...\n"
+    )
 
     print(start_message)
 
@@ -441,7 +453,7 @@ if __name__ == '__main__':
     # 2. Lead selection
     print("Which Enima to start with?")
     for num, enima in enumerate(you.enima):
-        print(f"({num+1})", enima.get_name())
+        print(f"({num + 1})", enima.get_name())
 
     lead = None
     valid_choice = False
@@ -477,4 +489,3 @@ if __name__ == '__main__':
         InputProcessor.check_inputs(player_input, ai_input, you, joey, elements)
         print()
         turn_counter += 1
-
