@@ -16,7 +16,7 @@ These creatures are called Enima, short for elemental animals.
 4. Defeat your opponent's team of three and win!
 
 # Example Screenshots
-At the start of the game, you will be greeted with this message:
+At the start of the game, you are greeted with this message:
 
 ![Intro Message](example_images/intro.png)
 
@@ -26,11 +26,11 @@ Then, the draft will start and you will be allowed to select your Enima:
 
 After selecting your Enima, your opponent will choose his:
 
-![Draft Message 2](example_images/drafting 2.png)
+![Draft Message 2](example_images/drafting2.png)
 
 At the beginning of combat, you are prompted to choose your starting Enima:
 
-![Lead Choice](example_images/lead choice.png)
+![Lead Choice](example_images/leadchoice.png)
 
 During combat, you can choose to attack or switch to a different Enima:
 
