@@ -41,11 +41,10 @@ Once all three Enima on the opposing side has been defeated, you win!
 ![Win](example_images/win.png)
 
 # How to Run the Game
-On Windows platforms (Python installation not required):
-1. Run the 'World of Os 1.1.exe' file in the output folder.
 
-On other platforms or if the exe file failed to work (Python installation required):
-1. Run 'main.py' on your preferred Python IDE, or in the command line.
+1. Install Python on your computer (ignore this step if you already have Python installed.)
+The latest version of Python can be found on its official website https://www.python.org
+2. Run 'main.py' on your preferred Python IDE, or in the command line.
 
 # Sofware Information
 - Written in Python 3.9.
